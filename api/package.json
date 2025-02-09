@@ -1,0 +1,33 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=21.7.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "class-validator": "0.14.1",
+    "cors": "2.8.5",
+    "dotenv": "16.4.7",
+    "express": "4.21.2",
+    "morgan": "1.10.0",
+    "typeorm": "0.3.20",
+    "typeorm-naming-strategies": "4.1.0",
+    "typescript": "5.7.3"
+  },
+  "devDependencies": {
+    "@types/cors": "2.8.17",
+    "@types/express": "5.0.0",
+    "@types/morgan": "1.9.9",
+    "concurrently": "9.1.2",
+    "nodemon": "3.1.9"
+  }
+}
