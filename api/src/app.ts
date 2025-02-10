@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet'
+import { UserRouter } from './users/users.router';
 
 class MyApp {
   public app: express.Application;
@@ -14,10 +15,15 @@ class MyApp {
     this.app.use(cors())
 
     // Routes
-    this.app.use('/api/v1/hello', (req, res) => {
-      res.status(200).json({message: 'Hello, world!'});
-    });
+    this.app.use('/api', this.routers())
   }
+
+  routers(): express.Router[] {
+    return [
+      new UserRouter().router,
+    ]
+  }
+
 }
 
 export default MyApp;
