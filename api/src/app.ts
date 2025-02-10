@@ -3,7 +3,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet'
 
-
 class MyApp {
   public app: express.Application;
   constructor() {
@@ -13,8 +12,10 @@ class MyApp {
     this.app.use(morgan('dev'));
     this.app.use(helmet())
     this.app.use(cors())
-    this.app.use('/hello', (req, res) => {
-      res.send('Hello, world!');
+
+    // Routes
+    this.app.use('/api/v1/hello', (req, res) => {
+      res.status(200).json({message: 'Hello, world!'});
     });
   }
 }
