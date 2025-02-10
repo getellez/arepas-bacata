@@ -8,8 +8,9 @@
     "node": ">=21.7.3"
   },
   "scripts": {
-    "start": "tsc && node dist/server.js",
-    "dev": "tsnd --respawn src/server.ts"
+    "start": "tsc && node dist/src/server.js",
+    "start:local": "tsnd --respawn src/server.ts",
+    "start:prod": "NODE_ENV=production yarn start"
   },
   "keywords": [],
   "author": "",
@@ -29,7 +30,6 @@
     "@types/cors": "2.8.17",
     "@types/express": "5.0.0",
     "@types/morgan": "1.9.9",
-    "concurrently": "9.1.2",
     "eslint": "9.20.0",
     "nodemon": "3.1.9",
     "prettier": "3.5.0",
