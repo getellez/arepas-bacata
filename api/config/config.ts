@@ -1,3 +1,6 @@
+import { DataSourceOptions } from 'typeorm'
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+
 export abstract class ConfigServer {
   constructor() {
     require('dotenv').config({ path: this.getEnvFile(this.nodeEnv) })
@@ -17,11 +20,27 @@ export abstract class ConfigServer {
 
   public getEnvFile(nodeEnv: string): string {
     // nodeEnv = 'local', 'development', 'production' or 'test'
-    console.log('NODE_ENV :>> ', process.env.NODE_ENV)
     if (!nodeEnv.length) {
       return '.env'
     }
 
     return `.env.${nodeEnv}`
+  }
+
+  public get typeORMConfig(): DataSourceOptions {
+    console.log('password :>> ', this.getEnvironment('DB_PASSWORD'))
+    return {
+      type: 'postgres',
+      host: this.getEnvironment('DB_HOST'),
+      port: this.getNumberEnv('DB_PORT'),
+      username: this.getEnvironment('DB_USER'),
+      password: this.getEnvironment('DB_PASSWORD'),
+      database: this.getEnvironment('DB_NAME'),
+      entities: [__dirname + '/../src/entities/*.entity{.ts,.js}'],
+      migrations: [__dirname + '/../src/migrations/*{.ts,.js}'],
+      synchronize: true,
+      logging: false,
+      namingStrategy: new SnakeNamingStrategy(),
+    }
   }
 }

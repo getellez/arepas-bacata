@@ -80,6 +80,9 @@ web_modules/
 .env.production
 .env.local
 
+# Docker volumes
+api/data
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

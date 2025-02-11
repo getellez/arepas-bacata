@@ -2,6 +2,7 @@ import http from 'node:http'
 import MyApp from './app'
 import express from 'express'
 import { ConfigServer } from '../config/config'
+import { DataSource } from 'typeorm'
 
 class ServerInitializer extends ConfigServer {
   private readonly app: express.Application
@@ -14,7 +15,19 @@ class ServerInitializer extends ConfigServer {
     this.server = http.createServer(this.app)
   }
 
+  private async dbConnect(): Promise<DataSource> {
+    try {
+      const PostgresDataSource = new DataSource(this.typeORMConfig)
+      console.log('Connecting to database...')
+      return await PostgresDataSource.initialize()
+    } catch (error) {
+      console.error(`Error during data source initialization:`, error)
+      process.exit(1)
+    }
+  }
+
   listen(port: number = this.port) {
+    this.dbConnect()
     this.server
       .listen(port, () => {
         console.log(`Server running on port ${this.port}`)
