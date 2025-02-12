@@ -28,7 +28,6 @@ export abstract class ConfigServer {
   }
 
   public get typeORMConfig(): DataSourceOptions {
-    console.log('password :>> ', this.getEnvironment('DB_PASSWORD'))
     return {
       type: 'postgres',
       host: this.getEnvironment('DB_HOST'),
