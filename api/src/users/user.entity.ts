@@ -1,8 +1,9 @@
-import { Column, Entity } from 'typeorm'
-import { BaseEntity } from '../../config/base.entity'
+import { Column, Entity, OneToMany, OneToOne } from 'typeorm'
+import { BaseEntity } from '../common/entities/base.entity'
+import { OrdersEntity } from '../orders/orders.entity'
 
-@Entity({ name: 'user' })
-export class UserEntity extends BaseEntity {
+@Entity('users')
+export class UsersEntity extends BaseEntity {
   @Column()
   username!: string
   @Column()
@@ -16,9 +17,8 @@ export class UserEntity extends BaseEntity {
   @Column()
   password!: string
   @Column()
-  isActive!: boolean
-  @Column()
-  isDeleted!: boolean
-  @Column()
   role!: string
+
+  @OneToMany(() => OrdersEntity, (order) => order.user) // note: we will create author property in the Photo class below
+  orders!: OrdersEntity[]
 }

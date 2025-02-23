@@ -1,7 +1,7 @@
 import http from 'node:http'
 import MyApp from './app'
 import express from 'express'
-import { ConfigServer } from '../config/config'
+import { ConfigServer } from './config/config'
 import { DataSource } from 'typeorm'
 
 class ServerInitializer extends ConfigServer {

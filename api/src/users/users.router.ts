@@ -8,5 +8,6 @@ export class UserRouter extends BaseRouter<UserController> {
 
   routes(): void {
     this.router.get('/users', (req, res) => this.controller.getUsers(req, res))
+    this.router.post('/users', (req, res) => this.controller.addUser(req, res))
   }
 }
