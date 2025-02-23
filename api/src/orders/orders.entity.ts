@@ -31,17 +31,16 @@ export class OrdersEntity extends BaseEntity {
 @Entity('order_items')
 export class OrderItemsEntity {
   @Column()
+  productQuantity!: number
+  @Column()
+  totalPrice!: number
+
   @ManyToOne(() => OrdersEntity, (order) => order.orderItems, {
     onDelete: 'CASCADE',
   })
+  @JoinColumn({ name: 'order_id' })
   order!: string
   @ManyToOne(() => ProductsEntity, (product) => product.orderItems)
-  @Column()
+  @JoinColumn({ name: 'product_id' })
   product!: string
-  @Column()
-  quantity!: number
-  @Column()
-  price!: number
-  @Column()
-  total!: number
 }
