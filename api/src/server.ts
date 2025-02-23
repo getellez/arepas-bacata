@@ -19,7 +19,9 @@ class ServerInitializer extends ConfigServer {
     try {
       const PostgresDataSource = new DataSource(this.typeORMConfig)
       console.log('Connecting to database...')
-      return await PostgresDataSource.initialize()
+      const db = await PostgresDataSource.initialize()
+      console.log('Database connected')
+      return db
     } catch (error) {
       console.error(`Error during data source initialization:`, error)
       process.exit(1)
