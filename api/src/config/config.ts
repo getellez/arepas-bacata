@@ -28,6 +28,7 @@ export abstract class ConfigServer {
   }
 
   public get typeORMConfig(): DataSourceOptions {
+    const entities = [__dirname + '/../*/*.entity{.ts,.js}']
     return {
       type: 'postgres',
       host: this.getEnvironment('DB_HOST'),
@@ -35,8 +36,8 @@ export abstract class ConfigServer {
       username: this.getEnvironment('DB_USER'),
       password: this.getEnvironment('DB_PASSWORD'),
       database: this.getEnvironment('DB_NAME'),
-      entities: [__dirname + '/../src/**/*.entity{.ts,.js}'],
-      // migrations: [__dirname + '/../src/migrations/*{.ts,.js}'],
+      entities: entities,
+      migrations: [__dirname + '/../src/migrations/*{.ts,.js}'],
       synchronize: true,
       logging: false,
       namingStrategy: new SnakeNamingStrategy(),

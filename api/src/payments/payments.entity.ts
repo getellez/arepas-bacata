@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToOne } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne } from 'typeorm'
+import { BaseEntity } from '../common/entities/base.entity'
 import { PAYMENTS_STATUS } from '../common/interfaces/payments.interface'
 import { OrdersEntity } from '../orders/orders.entity'
 

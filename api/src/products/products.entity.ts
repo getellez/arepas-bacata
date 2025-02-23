@@ -1,9 +1,9 @@
 import { Column, Entity, OneToMany } from 'typeorm'
+import { CategoriesEntity } from '../categories/categories.entity'
 import { BaseEntity } from '../common/entities/base.entity'
 import { OrderItemsEntity } from '../orders/orders.entity'
-import { CategoriesEntity } from '../categories/categories.entity'
 
-@Entity('products')
+@Entity({ name: 'products' })
 export class ProductsEntity extends BaseEntity {
   @Column()
   name!: string
