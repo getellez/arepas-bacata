@@ -1,8 +1,8 @@
-import 'reflect-metadata'
-import express from 'express'
-import morgan from 'morgan'
 import cors from 'cors'
+import express from 'express'
 import helmet from 'helmet'
+import morgan from 'morgan'
+import 'reflect-metadata'
 import { UserRouter } from './users/users.router'
 
 class MyApp {

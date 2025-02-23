@@ -1,8 +1,8 @@
-import http from 'node:http'
-import MyApp from './app'
 import express from 'express'
-import { ConfigServer } from './config/config'
+import http from 'node:http'
 import { DataSource } from 'typeorm'
+import MyApp from './app'
+import { ConfigServer } from './config/config'
 
 class ServerInitializer extends ConfigServer {
   private readonly app: express.Application
