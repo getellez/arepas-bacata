@@ -33,5 +33,5 @@ export class UserDTO extends BaseDto {
   @IsString()
   @MaxLength(15)
   @IsOptional()
-  phoneNumer!: number
+  phoneNumer!: string
 }

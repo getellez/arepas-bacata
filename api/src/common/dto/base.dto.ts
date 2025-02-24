@@ -3,7 +3,7 @@ import { IsDate, IsOptional, IsUUID } from 'class-validator'
 export class BaseDto {
   @IsOptional()
   @IsUUID()
-  id!: number
+  id!: string
   @IsDate()
   @IsOptional()
   createdAt!: Date
