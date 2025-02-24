@@ -5,9 +5,6 @@ import { OrdersEntity } from '../orders/orders.entity'
 
 @Entity('payments')
 export class PaymentsEntity extends BaseEntity {
-  @OneToOne(() => OrdersEntity, (order) => order.payment)
-  @JoinColumn({ name: 'order_id' })
-  order!: string
   @Column()
   amount!: number
   @Column({
@@ -17,6 +14,8 @@ export class PaymentsEntity extends BaseEntity {
   status!: string
   @Column()
   paymentMethod!: string
-  @Column()
-  paymentDate!: Date
+
+  @OneToOne(() => OrdersEntity, (order) => order.payment)
+  @JoinColumn({ name: 'order_id' })
+  order!: string
 }
