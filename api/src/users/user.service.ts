@@ -11,7 +11,7 @@ export class UserService extends BaseService<UsersEntity> {
   async findAllUsers() {
     return (await this.execRepository).find()
   }
-  async findUserById(id: string) {
+  async findUserById(id: string): Promise<UsersEntity | null> {
     return (await this.execRepository).findOne({ where: { id } })
   }
   async createUser(payload: UserDTO) {

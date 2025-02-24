@@ -3,6 +3,7 @@ import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import 'reflect-metadata'
+import { ProductsRouter } from './products/products.router'
 import { UserRouter } from './users/users.router'
 
 class MyApp {
@@ -20,7 +21,7 @@ class MyApp {
   }
 
   routers(): express.Router[] {
-    return [new UserRouter().router]
+    return [new UserRouter().router, new ProductsRouter().router]
   }
 }
 
