@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany } from 'typeorm'
 import { BaseEntity } from '../common/entities/base.entity'
 import { OrdersEntity } from '../orders/orders.entity'
+import { Exclude } from 'class-transformer'
 
 @Entity('users')
 export class UsersEntity extends BaseEntity {
@@ -13,7 +14,8 @@ export class UsersEntity extends BaseEntity {
   @Column()
   email!: string
   @Column({ nullable: true })
-  phoneNumer!: number
+  phoneNumer!: string
+  @Exclude()
   @Column()
   password!: string
   @Column()

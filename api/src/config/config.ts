@@ -1,4 +1,4 @@
-import { DataSourceOptions } from 'typeorm'
+import { DataSource, DataSourceOptions } from 'typeorm'
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
 
 export abstract class ConfigServer {
@@ -25,6 +25,19 @@ export abstract class ConfigServer {
     }
 
     return `.env.${nodeEnv}`
+  }
+
+  protected async dbConnect(): Promise<DataSource> {
+    try {
+      const PostgresDataSource = new DataSource(this.typeORMConfig)
+      console.log('Connecting to database...')
+      const db = await PostgresDataSource.initialize()
+      console.log('Database connected')
+      return db
+    } catch (error) {
+      console.error(`Error during data source initialization:`, error)
+      process.exit(1)
+    }
   }
 
   public get typeORMConfig(): DataSourceOptions {
