@@ -4,6 +4,7 @@ import helmet from 'helmet'
 import morgan from 'morgan'
 import 'reflect-metadata'
 import { CategoriesRouter } from './categories/categories.router'
+import { OrdersRouter } from './orders/orders.router'
 import { PaymentsRouter } from './payments/payments.router'
 import { ProductsRouter } from './products/products.router'
 import { UserRouter } from './users/users.router'
@@ -28,6 +29,7 @@ class MyApp {
       new ProductsRouter().router,
       new CategoriesRouter().router,
       new PaymentsRouter().router,
+      new OrdersRouter().router,
     ]
   }
 }
