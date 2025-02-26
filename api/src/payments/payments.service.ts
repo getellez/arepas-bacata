@@ -12,7 +12,11 @@ export class PaymentsService extends BaseService<PaymentsEntity> {
   }
 
   async findPaymentById(id: string) {
-    return (await this.execRepository).findOne({ where: { id } })
+    const payment = (await this.execRepository).findOne({
+      where: { id },
+      relations: ['order'],
+    })
+    return payment
   }
 
   async createPayment(payload: PaymentsDTO) {
