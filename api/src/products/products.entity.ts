@@ -16,6 +16,6 @@ export class ProductsEntity extends BaseEntity {
 
   @OneToMany(() => CategoriesEntity, (category) => category.product)
   category!: CategoriesEntity[]
-  @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.product)
+  @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.productId)
   orderItems!: OrderItemsEntity[]
 }

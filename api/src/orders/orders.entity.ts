@@ -1,4 +1,11 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from 'typeorm'
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+} from 'typeorm'
 import { BaseEntity } from '../common/entities/base.entity'
 import { PaymentsEntity } from '../payments/payments.entity'
 import { ProductsEntity } from '../products/products.entity'
@@ -16,8 +23,8 @@ export class OrdersEntity extends BaseEntity {
   user!: UsersEntity
   @OneToOne(() => PaymentsEntity, (payment) => payment.order)
   payment!: PaymentsEntity
-  @ManyToOne(() => OrderItemsEntity, (orderItems) => orderItems.order)
-  orderItems!: ProductsEntity[]
+  @OneToMany(() => OrderItemsEntity, (orderItems) => orderItems.orderId)
+  orderItems!: OrderItemsEntity[]
 }
 
 @Entity('order_items')
@@ -27,12 +34,14 @@ export class OrderItemsEntity extends BaseEntity {
   @Column()
   totalPrice!: number
 
+  @ManyToOne(() => ProductsEntity, (product) => product.orderItems, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({ name: 'product_id' })
+  productId!: ProductsEntity
   @ManyToOne(() => OrdersEntity, (order) => order.orderItems, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'order_id' })
-  order!: string
-  @ManyToOne(() => ProductsEntity, (product) => product.orderItems)
-  @JoinColumn({ name: 'product_id' })
-  product!: string
+  orderId!: OrdersEntity
 }

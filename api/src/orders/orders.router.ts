@@ -1,5 +1,5 @@
 import { BaseRouter } from '../router/base.router'
-import { OrdersController } from './orders.controller'
+import { OrderItemsController, OrdersController } from './orders.controller'
 
 export class OrdersRouter extends BaseRouter<OrdersController> {
   constructor() {
@@ -21,6 +21,29 @@ export class OrdersRouter extends BaseRouter<OrdersController> {
     )
     this.router.delete('/v1/orders/:id', (req, res) =>
       this.controller.deleteOrder(req, res)
+    )
+  }
+}
+
+export class OrderItemsRouter extends BaseRouter<OrderItemsController> {
+  constructor() {
+    super(OrderItemsController)
+  }
+
+  routes(): void {
+    this.router.post('/v1/orders-items', (req, res) =>
+      this.controller.createOrderItems(req, res)
+    )
+    this.router.get('/v1/orders-items/:orderId', (req, res) =>
+      this.controller.getItemsByOrderId(req, res)
+    )
+    this.router.put(
+      '/v1/orders-items/:orderId/products/:productId',
+      (req, res) => this.controller.updateOrderItems(req, res)
+    )
+    this.router.delete(
+      '/v1/orders-items/:orderId/products/:productId',
+      (req, res) => this.controller.deleteItemFromOrder(req, res)
     )
   }
 }
