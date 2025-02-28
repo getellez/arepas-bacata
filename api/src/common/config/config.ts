@@ -30,7 +30,7 @@ export abstract class ConfigServer {
 
   static async initConnect(): Promise<DataSource> {
     if (!ConfigServer.dataSourceConnection) {
-      console.log('Datasource connected')
+      console.log('✅ Datasource connected')
       ConfigServer.dataSourceConnection = AppDataSourceConfig.initialize()
     }
 

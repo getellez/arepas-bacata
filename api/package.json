@@ -10,7 +10,10 @@
   "scripts": {
     "start": "tsc && node dist/src/server.js",
     "local": "nodemon",
-    "prod": "NODE_ENV=production yarn start"
+    "prod": "NODE_ENV=production yarn start",
+    "typeorm": "typeorm-ts-node-esm -d ./src/common/config/dataSource.config.ts",
+    "migration:generate": "yarn typeorm migration:generate",
+    "migration:run": "yarn typeorm migration:run"
   },
   "keywords": [
     "post",

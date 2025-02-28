@@ -35,3 +35,8 @@ export class UserDTO extends BaseDto {
   @IsOptional()
   phoneNumer!: string
 }
+
+export enum RoleType {
+  ADMIN = 'admin',
+  USER = 'user',
+}
