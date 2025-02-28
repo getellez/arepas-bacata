@@ -1,4 +1,4 @@
-import { BaseService } from '../common/services/base.service'
+import { BaseService } from '../../common/services/base.service'
 import { PaymentsDTO } from './payments.dto'
 import { PaymentsEntity } from './payments.entity'
 

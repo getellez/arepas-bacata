@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { DeleteResult, UpdateResult } from 'typeorm'
-import { HttpResponse } from '../common/interfaces/common.interface'
+import { HttpResponse } from '../../common/interfaces/common.interface'
 import { CategoriesService } from './categories.service'
 
 export class CategoriesControllers {

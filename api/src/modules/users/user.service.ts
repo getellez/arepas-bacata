@@ -1,5 +1,5 @@
 import { DeleteResult, UpdateResult } from 'typeorm'
-import { BaseService } from '../common/services/base.service'
+import { BaseService } from '../../common/services/base.service'
 import { UserDTO } from './user.dto'
 import { UsersEntity } from './user.entity'
 

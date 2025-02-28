@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany } from 'typeorm'
+import { BaseEntity } from '../../common/entities/base.entity'
 import { CategoriesEntity } from '../categories/categories.entity'
-import { BaseEntity } from '../common/entities/base.entity'
 import { OrderItemsEntity } from '../orders/orders.entity'
 
 @Entity('products')

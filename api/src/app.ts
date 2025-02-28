@@ -2,11 +2,11 @@ import cors from 'cors'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import { CategoriesRouter } from './categories/categories.router'
-import { OrderItemsRouter, OrdersRouter } from './orders/orders.router'
-import { PaymentsRouter } from './payments/payments.router'
-import { ProductsRouter } from './products/products.router'
-import { UserRouter } from './users/users.router'
+import { CategoriesRouter } from './modules/categories/categories.router'
+import { OrderItemsRouter, OrdersRouter } from './modules/orders/orders.router'
+import { PaymentsRouter } from './modules/payments/payments.router'
+import { ProductsRouter } from './modules/products/product.router'
+import { UserRouter } from './modules/users/user.router'
 
 class MyApp {
   public app: express.Application

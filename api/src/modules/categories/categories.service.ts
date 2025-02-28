@@ -1,4 +1,4 @@
-import { BaseService } from '../common/services/base.service'
+import { BaseService } from '../../common/services/base.service'
 import { CategoriesEntity } from './categories.entity'
 
 export class CategoriesService extends BaseService<CategoriesEntity> {

@@ -1,4 +1,4 @@
-import { BaseService } from '../common/services/base.service'
+import { BaseService } from '../../common/services/base.service'
 import { OrderDTO, OrderItemsDTO } from './orders.dto'
 import { OrderItemsEntity, OrdersEntity } from './orders.entity'
 

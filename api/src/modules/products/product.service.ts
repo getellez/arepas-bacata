@@ -1,7 +1,7 @@
 import { DeleteResult, UpdateResult } from 'typeorm'
-import { BaseService } from '../common/services/base.service'
+import { BaseService } from '../../common/services/base.service'
 import { ProductDTO } from './product.dto'
-import { ProductsEntity } from './products.entity'
+import { ProductsEntity } from './product.entity'
 
 export class ProductService extends BaseService<ProductsEntity> {
   constructor() {

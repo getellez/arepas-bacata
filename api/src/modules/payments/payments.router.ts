@@ -1,4 +1,4 @@
-import { BaseRouter } from '../common/router/base.router'
+import { BaseRouter } from '../../common/router/base.router'
 import { PaymentsController } from './payments.controller'
 
 export class PaymentsRouter extends BaseRouter<PaymentsController> {

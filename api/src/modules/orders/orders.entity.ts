@@ -6,9 +6,9 @@ import {
   OneToMany,
   OneToOne,
 } from 'typeorm'
-import { BaseEntity } from '../common/entities/base.entity'
+import { BaseEntity } from '../../common/entities/base.entity'
 import { PaymentsEntity } from '../payments/payments.entity'
-import { ProductsEntity } from '../products/products.entity'
+import { ProductsEntity } from '../products/product.entity'
 import { UsersEntity } from '../users/user.entity'
 
 @Entity('orders')
