@@ -2,7 +2,7 @@ import { DataSource } from 'typeorm'
 import { AppDataSourceConfig } from './dataSource.config'
 
 export abstract class ConfigServer {
-  private static instance: Promise<DataSource> | null = null
+  private static dataSourceConnection: Promise<DataSource> | null = null
   constructor() {
     require('dotenv').config({ path: this.getEnvFile(this.nodeEnv) })
   }
@@ -29,11 +29,11 @@ export abstract class ConfigServer {
   }
 
   static async initConnect(): Promise<DataSource> {
-    if (!ConfigServer.instance) {
+    if (!ConfigServer.dataSourceConnection) {
       console.log('Datasource connected')
-      ConfigServer.instance = AppDataSourceConfig.initialize()
+      ConfigServer.dataSourceConnection = AppDataSourceConfig.initialize()
     }
 
-    return ConfigServer.instance
+    return ConfigServer.dataSourceConnection
   }
 }
