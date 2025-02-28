@@ -12,8 +12,12 @@
     "local": "nodemon",
     "prod": "NODE_ENV=production yarn start"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "post",
+    "point of sale",
+    "arepas_bacata"
+  ],
+  "author": "Germán Téllez",
   "license": "ISC",
   "dependencies": {
     "class-transformer": "^0.5.1",

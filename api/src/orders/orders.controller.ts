@@ -1,17 +1,20 @@
 import { Request, Response } from 'express'
+import { DeleteResult, UpdateResult } from 'typeorm'
+import { HttpResponse } from '../common/interfaces/common.interface'
 import { OrderItemsService, OrdersService } from './orders.service'
 
 export class OrdersController {
   constructor(
-    private readonly ordersService: OrdersService = new OrdersService()
+    private readonly ordersService: OrdersService = new OrdersService(),
+    private readonly httpResponse: HttpResponse = new HttpResponse()
   ) {}
 
   async findAllOrders(req: Request, res: Response) {
     try {
       const data = await this.ordersService.getAllOrders()
-      res.status(200).json(data)
+      this.httpResponse.Ok(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 
@@ -19,9 +22,14 @@ export class OrdersController {
     try {
       const orderId = req.params.id
       const data = await this.ordersService.getOrderById(orderId)
-      res.status(200).json(data)
+
+      if (!data) {
+        this.httpResponse.NotFound(res, 'Order not found')
+        return
+      }
+      this.httpResponse.Ok(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 
@@ -29,9 +37,9 @@ export class OrdersController {
     try {
       const payload = req.body
       const data = await this.ordersService.createOrder(payload)
-      res.status(201).json(data)
+      this.httpResponse.Created(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 
@@ -39,36 +47,48 @@ export class OrdersController {
     try {
       const orderId = req.params.id
       const payload = req.body
-      const data = await this.ordersService.updateOrder(orderId, payload)
-      res.status(201).json(data)
+      const data: UpdateResult = await this.ordersService.updateOrder(
+        orderId,
+        payload
+      )
+      if (data.affected === 0) {
+        this.httpResponse.NotFound(res, 'Order not found')
+        return
+      }
+      this.httpResponse.Ok(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 
   async deleteOrder(req: Request, res: Response) {
     try {
       const orderId = req.params.id
-      const data = await this.ordersService.deleteOrder(orderId)
-      res.status(200).json(data)
+      const data: DeleteResult = await this.ordersService.deleteOrder(orderId)
+      if (data.affected === 0) {
+        this.httpResponse.NotFound(res, 'Order not found')
+        return
+      }
+      this.httpResponse.Ok(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 }
 
 export class OrderItemsController {
   constructor(
-    private readonly orderItemsService: OrderItemsService = new OrderItemsService()
+    private readonly orderItemsService: OrderItemsService = new OrderItemsService(),
+    private readonly httpResponse: HttpResponse = new HttpResponse()
   ) {}
 
   async createOrderItems(req: Request, res: Response) {
     try {
       const payload = req.body
       const data = await this.orderItemsService.createOrderItems(payload)
-      res.status(201).json(data)
+      this.httpResponse.Created(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 
@@ -76,9 +96,13 @@ export class OrderItemsController {
     try {
       const orderId = req.params.orderId
       const data = await this.orderItemsService.getItemsByOrderId(orderId)
-      res.status(200).json(data)
+      if (!data.length) {
+        this.httpResponse.NotFound(res, 'Order items not found')
+        return
+      }
+      this.httpResponse.Ok(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 
@@ -86,27 +110,35 @@ export class OrderItemsController {
     try {
       const { orderId, productId } = req.params
       const payload = req.body
-      const data = await this.orderItemsService.updateOrderItems(
+      const data: UpdateResult = await this.orderItemsService.updateOrderItems(
         orderId,
         productId,
         payload
       )
-      res.status(201).json(data)
+      if (data.affected === 0) {
+        this.httpResponse.NotFound(res, 'Order item not found')
+        return
+      }
+      this.httpResponse.Ok(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 
   async deleteItemFromOrder(req: Request, res: Response) {
     try {
       const { orderId, productId } = req.params
-      const data = await this.orderItemsService.deleteOrderItem(
+      const data: DeleteResult = await this.orderItemsService.deleteOrderItem(
         orderId,
         productId
       )
-      res.status(200).json(data)
+      if (data.affected === 0) {
+        this.httpResponse.NotFound(res, 'Order item not found')
+        return
+      }
+      this.httpResponse.Ok(res, data)
     } catch (error) {
-      console.error(error)
+      this.httpResponse.Error(res, error)
     }
   }
 }
