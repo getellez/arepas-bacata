@@ -11,9 +11,9 @@
     "start": "tsc && node dist/src/server.js",
     "local": "nodemon",
     "prod": "NODE_ENV=production yarn start",
-    "typeorm": "typeorm-ts-node-esm -d ./src/common/config/dataSource.config.ts",
-    "migration:generate": "yarn typeorm migration:generate",
-    "migration:run": "yarn typeorm migration:run"
+    "typeorm": "typeorm-ts-node-commonjs -d ./src/common/config/dataSource.config.ts",
+    "m:g": "yarn run typeorm migration:generate ./src/migrations/migration",
+    "m:r": "yarn run typeorm migration:run"
   },
   "keywords": [
     "post",
@@ -45,6 +45,7 @@
     "nodemon": "3.1.9",
     "prettier": "3.5.0",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "ts-node-dev": "2.0.0"
+    "ts-node-dev": "2.0.0",
+    "typeorm-ts-node-esm": "0.3.20"
   }
 }

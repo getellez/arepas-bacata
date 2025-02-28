@@ -19,12 +19,14 @@ export class UsersEntity extends BaseEntity {
   @Exclude()
   @Column()
   password!: string
-  @Column({ type: 'enum', enum: RoleType, nullable: false })
+  @Column({
+    type: 'enum',
+    enum: RoleType,
+    nullable: false,
+    default: RoleType.USER,
+  })
   role!: string
 
-  @Column({ nullable: true })
-  alias!: string
-
-  @OneToMany(() => OrdersEntity, (order) => order.user) // note: we will create author property in the Photo class below
+  @OneToMany(() => OrdersEntity, (order) => order.user)
   orders!: OrdersEntity[]
 }
