@@ -1,4 +1,4 @@
-import { BaseRouter } from '../router/base.router'
+import { BaseRouter } from '../common/router/base.router'
 import { CategoriesControllers } from './categories.controller'
 
 export class CategoriesRouter extends BaseRouter<CategoriesControllers> {

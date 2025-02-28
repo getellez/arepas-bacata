@@ -1,5 +1,5 @@
 import { EntityTarget, Repository } from 'typeorm'
-import { ConfigServer } from '../../config/config'
+import { ConfigServer } from '../config/config'
 import { BaseEntity } from '../entities/base.entity'
 
 export abstract class BaseService<
@@ -12,7 +12,7 @@ export abstract class BaseService<
   }
 
   async initRepository(e: EntityTarget<Entity>): Promise<Repository<Entity>> {
-    const getConnection = await this.dbConnect()
+    const getConnection = await ConfigServer.initConnect()
     return getConnection.getRepository(e)
   }
 }

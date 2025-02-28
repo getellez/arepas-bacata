@@ -1,7 +1,8 @@
 import express from 'express'
 import http from 'node:http'
+import { DataSource } from 'typeorm'
 import MyApp from './app'
-import { ConfigServer } from './config/config'
+import { ConfigServer } from './common/config/config'
 
 class ServerInitializer extends ConfigServer {
   private readonly app: express.Application
@@ -11,11 +12,19 @@ class ServerInitializer extends ConfigServer {
   constructor() {
     super()
     this.app = new MyApp().app
+    this.dbConnect()
     this.server = http.createServer(this.app)
   }
 
+  async dbConnect(): Promise<DataSource | void> {
+    try {
+      return await ConfigServer.initConnect()
+    } catch (error) {
+      console.error(`Error connecting to database:`, error)
+    }
+  }
+
   listen(port: number = this.port) {
-    this.dbConnect()
     this.server
       .listen(port, () => {
         console.log(`Server running on port ${this.port}`)

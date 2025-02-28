@@ -1,4 +1,4 @@
-import { BaseRouter } from '../router/base.router'
+import { BaseRouter } from '../common/router/base.router'
 import { ProductsController } from './products.controller'
 
 export class ProductsRouter extends BaseRouter<ProductsController> {
