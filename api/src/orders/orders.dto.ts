@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator'
 import { BaseDto } from '../common/dto/base.dto'
 
 export class OrderDTO extends BaseDto {
@@ -8,6 +8,9 @@ export class OrderDTO extends BaseDto {
   @IsString({})
   @IsNotEmpty()
   status!: string
+  @IsString()
+  @IsOptional()
+  clientName!: string
 }
 
 export class OrderItemsDTO extends BaseDto {

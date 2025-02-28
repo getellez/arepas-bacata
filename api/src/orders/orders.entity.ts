@@ -34,6 +34,9 @@ export class OrderItemsEntity extends BaseEntity {
   @Column()
   totalPrice!: number
 
+  @Column({ nullable: true })
+  clientName!: string
+
   @ManyToOne(() => ProductsEntity, (product) => product.orderItems, {
     onDelete: 'CASCADE',
   })
