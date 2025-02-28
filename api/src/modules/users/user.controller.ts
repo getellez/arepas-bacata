@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { DeleteResult, UpdateResult } from 'typeorm'
-import { HttpResponse } from '../../common/interfaces/common.interface'
+import { HttpResponse } from '../../interfaces/common.interface'
 import { UserDTO } from './user.dto'
 import { UserService } from './user.service'
 
