@@ -1,9 +1,13 @@
-import { BaseRouter } from '../../common/router/base.router'
+import { BaseRouter } from '../../common/base.router'
 import { OrderItemsController, OrdersController } from './orders.controller'
+import { OrderItemsMiddleware, OrderMiddleware } from './orders.middleware'
 
-export class OrdersRouter extends BaseRouter<OrdersController> {
+export class OrdersRouter extends BaseRouter<
+  OrdersController,
+  OrderMiddleware
+> {
   constructor() {
-    super(OrdersController)
+    super(OrdersController, OrderMiddleware)
   }
 
   routes(): void {
@@ -25,9 +29,12 @@ export class OrdersRouter extends BaseRouter<OrdersController> {
   }
 }
 
-export class OrderItemsRouter extends BaseRouter<OrderItemsController> {
+export class OrderItemsRouter extends BaseRouter<
+  OrderItemsController,
+  OrderItemsMiddleware
+> {
   constructor() {
-    super(OrderItemsController)
+    super(OrderItemsController, OrderItemsMiddleware)
   }
 
   routes(): void {

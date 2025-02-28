@@ -1,9 +1,13 @@
-import { BaseRouter } from '../../common/router/base.router'
+import { BaseRouter } from '../../common/base.router'
 import { PaymentsController } from './payments.controller'
+import { PaymentMiddleware } from './payments.middleware'
 
-export class PaymentsRouter extends BaseRouter<PaymentsController> {
+export class PaymentsRouter extends BaseRouter<
+  PaymentsController,
+  PaymentMiddleware
+> {
   constructor() {
-    super(PaymentsController)
+    super(PaymentsController, PaymentMiddleware)
   }
 
   routes(): void {

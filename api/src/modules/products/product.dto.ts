@@ -5,7 +5,7 @@ import {
   IsString,
   MaxLength,
 } from 'class-validator'
-import { BaseDto } from '../common/dto/base.dto'
+import { BaseDto } from '../../common/dto/base.dto'
 
 export class ProductDTO extends BaseDto {
   @IsString()

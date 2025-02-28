@@ -13,5 +13,5 @@ export class PaymentsDTO extends BaseDto {
   paymentMethod!: string
   @IsString()
   @IsNotEmpty()
-  oder_id!: string
+  orderId!: string
 }

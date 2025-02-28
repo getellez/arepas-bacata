@@ -1,11 +1,13 @@
 import {
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
 } from 'class-validator'
 import { BaseDto } from '../../common/dto/base.dto'
+import { UserRoleTypes } from './users.interface'
 
 export class UserDTO extends BaseDto {
   @IsString()
@@ -27,16 +29,11 @@ export class UserDTO extends BaseDto {
   @IsNotEmpty()
   @MaxLength(25)
   password!: string
-  @IsString()
+  @IsEnum(UserRoleTypes)
   @IsNotEmpty()
   role!: string
   @IsString()
   @MaxLength(15)
   @IsOptional()
   phoneNumer!: string
-}
-
-export enum RoleType {
-  ADMIN = 'admin',
-  USER = 'user',
 }

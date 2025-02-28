@@ -1,9 +1,13 @@
-import { BaseRouter } from '../../common/router/base.router'
+import { BaseRouter } from '../../common/base.router'
 import { CategoriesControllers } from './categories.controller'
+import { CategoriesMiddleware } from './categories.middleware'
 
-export class CategoriesRouter extends BaseRouter<CategoriesControllers> {
+export class CategoriesRouter extends BaseRouter<
+  CategoriesControllers,
+  CategoriesMiddleware
+> {
   constructor() {
-    super(CategoriesControllers)
+    super(CategoriesControllers, CategoriesMiddleware)
   }
 
   routes(): void {

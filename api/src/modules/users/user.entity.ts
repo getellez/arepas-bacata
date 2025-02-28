@@ -2,7 +2,7 @@ import { Exclude } from 'class-transformer'
 import { Column, Entity, OneToMany } from 'typeorm'
 import { BaseEntity } from '../../common/entities/base.entity'
 import { OrdersEntity } from '../orders/orders.entity'
-import { RoleType } from './user.dto'
+import { UserRoleTypes } from './users.interface'
 
 @Entity('users')
 export class UsersEntity extends BaseEntity {
@@ -21,9 +21,9 @@ export class UsersEntity extends BaseEntity {
   password!: string
   @Column({
     type: 'enum',
-    enum: RoleType,
+    enum: UserRoleTypes,
     nullable: false,
-    default: RoleType.USER,
+    default: UserRoleTypes.USER,
   })
   role!: string
 

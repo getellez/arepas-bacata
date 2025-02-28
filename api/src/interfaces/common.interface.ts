@@ -19,6 +19,14 @@ export class HttpResponse {
     })
   }
 
+  BadRequest(res: Response, data: any): Response {
+    return res.status(HttpStatus.BAD_REQUEST).json({
+      status: HttpStatus.BAD_REQUEST,
+      message: 'Bad Request',
+      error: data,
+    })
+  }
+
   Created(res: Response, data: any): Response {
     return res.status(HttpStatus.CREATED).json({
       status: HttpStatus.CREATED,

@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator'
-import { BaseDto } from '../common/dto/base.dto'
+import { BaseDto } from '../../common/dto/base.dto'
 
 export class CategoriesDTO extends BaseDto {
   @IsString()
