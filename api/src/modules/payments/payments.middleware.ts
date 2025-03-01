@@ -8,15 +8,8 @@ export class PaymentMiddleware {
     private readonly httpResponse: HttpResponse = new HttpResponse()
   ) {}
   userValidator(req: Request, res: Response, next: NextFunction) {
-    const { amount, status, paymentMethod, orderId } = req.body
-
     const payload = new PaymentsDTO()
-
-    payload.amount = amount
-    payload.status = status
-    payload.paymentMethod = paymentMethod
-    payload.orderId = orderId
-
+    Object.assign(payload, req.body)
     validate(payload).then((errors) => {
       if (errors.length > 0) {
         return this.httpResponse.Error(res, `Validation Error: ${errors}`)

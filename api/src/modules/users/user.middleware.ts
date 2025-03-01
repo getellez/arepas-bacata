@@ -8,24 +8,18 @@ export class UserMiddleware {
     private readonly httpResponse: HttpResponse = new HttpResponse()
   ) {}
   userValidator(req: Request, res: Response, next: NextFunction) {
-    const { username, firstName, lastName, email, password, role, phoneNumer } =
-      req.body
-
-    const valid = new UserDTO()
-
-    valid.firstName = firstName
-    valid.lastName = lastName
-    valid.username = username
-    valid.email = email
-    valid.password = password
-    valid.role = role
-    valid.phoneNumer = phoneNumer
-
-    validate(valid).then((errors) => {
-      if (errors.length > 0) {
-        return this.httpResponse.BadRequest(res, `Validation Error: ${errors}`)
+    const payload = new UserDTO()
+    Object.assign(payload, req.body)
+    validate(payload, { whitelist: true, forbidNonWhitelisted: true }).then(
+      (errors) => {
+        if (errors.length > 0) {
+          return this.httpResponse.BadRequest(
+            res,
+            `Validation Error: ${errors}`
+          )
+        }
+        next()
       }
-      next()
-    })
+    )
   }
 }

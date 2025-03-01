@@ -9,15 +9,8 @@ export class ProductMiddleware {
   ) {}
   async userValidator(req: Request, res: Response, next: NextFunction) {
     try {
-      const { name, price, description, image } = req.body
-
       const payload = new ProductDTO()
-
-      payload.name = name
-      payload.price = price
-      payload.description = description
-      payload.image = image
-
+      Object.assign(payload, req.body)
       const errors = await validate(payload)
       if (errors.length > 0) {
         this.httpResponse.BadRequest(res, errors)
