@@ -17,7 +17,7 @@ export class UsersEntity extends BaseEntity {
   @Column({ nullable: true })
   phoneNumer!: string
   @Exclude()
-  @Column()
+  @Column({ select: false })
   password!: string
   @Column({
     type: 'enum',
