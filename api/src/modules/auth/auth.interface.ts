@@ -5,4 +5,5 @@ export interface JwtTokenPayload {
   email: string
   role: UserRoleTypes
   permissions: {}
+  plan: string
 }

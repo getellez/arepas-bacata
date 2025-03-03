@@ -2,6 +2,7 @@ import cors from 'cors'
 import express from 'express'
 import helmet from 'helmet'
 import morgan from 'morgan'
+import { JwtStrategy, LoginStrategy } from './modules/auth/auth.strategies'
 import { CategoriesRouter } from './modules/categories/categories.router'
 import { OrderItemsRouter, OrdersRouter } from './modules/orders/orders.router'
 import { PaymentsRouter } from './modules/payments/payments.router'
@@ -14,12 +15,18 @@ class MyApp {
     this.app = express()
     this.app.use(express.json())
     this.app.use(express.urlencoded({ extended: true }))
+    this.passportUse()
     this.app.use(morgan('dev'))
     this.app.use(helmet())
     this.app.use(cors())
 
     // Routes
     this.app.use('/api', this.routers())
+  }
+
+  passportUse() {
+    // Passport strategies
+    return [new LoginStrategy().use, new JwtStrategy().use]
   }
 
   routers(): express.Router[] {
