@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { JWT_EXPIRATION } from '../../common/common.constants'
 import { ConfigServer } from '../../common/config/config'
 import { UserService } from '../users/user.service'
 import { JwtTokenPayload } from './auth.interface'
@@ -21,11 +22,11 @@ export class AuthService extends ConfigServer {
     if (!isMatch) {
       return null
     }
-    return Boolean(user)
+    return user
   }
 
   signToken(payload: jwt.JwtPayload, secret: string) {
-    return this.jwtInstance.sign(payload, secret, { expiresIn: '7d' })
+    return this.jwtInstance.sign(payload, secret, { expiresIn: JWT_EXPIRATION })
   }
 
   async generateJWToken(payload: JwtTokenPayload): Promise<string> {
@@ -38,13 +39,5 @@ export class AuthService extends ConfigServer {
     const accessToken = this.signToken(jwtPayload, jwtSecret)
 
     return accessToken
-  }
-
-  async login() {
-    return 'login'
-  }
-
-  async register() {
-    return 'register'
   }
 }

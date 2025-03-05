@@ -31,7 +31,7 @@ export class UserDTO extends BaseDto {
   password!: string
   @IsEnum(UserRoleTypes)
   @IsNotEmpty()
-  role!: string
+  role!: UserRoleTypes
   @IsString()
   @MaxLength(15)
   @IsOptional()

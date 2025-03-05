@@ -3,6 +3,7 @@ import { DeleteResult, UpdateResult } from 'typeorm'
 import { HttpResponse } from '../../interfaces/common.interface'
 import { UserDTO } from './user.dto'
 import { UserService } from './user.service'
+import { UserWithoutPassword } from './users.interface'
 
 export class UserController {
   constructor(
@@ -38,7 +39,13 @@ export class UserController {
     try {
       const payload = req.body
       const data = await this.userService.createUser(payload)
-      this.httpResponse.Created(res, data)
+      if (!data) {
+        this.httpResponse.BadRequest(res, 'User not created')
+        return
+      }
+      const { password, ...userWithoutPassword } = data
+      const createdUser: UserWithoutPassword = userWithoutPassword
+      this.httpResponse.Created(res, createdUser)
     } catch (error) {
       this.httpResponse.Error(res, error)
     }
@@ -47,10 +54,7 @@ export class UserController {
     try {
       const userId = req.params.id
       const payload = req.body as UserDTO
-      const data: UpdateResult = await this.userService.updateUser(
-        userId,
-        payload
-      )
+      const data: UpdateResult = await this.userService.updateUser(userId, payload)
       if (data.affected === 0) {
         this.httpResponse.NotFound(res, 'User not found')
         return

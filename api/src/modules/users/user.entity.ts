@@ -25,7 +25,7 @@ export class UsersEntity extends BaseEntity {
     nullable: false,
     default: UserRoleTypes.USER,
   })
-  role!: string
+  role!: UserRoleTypes
 
   @OneToMany(() => OrdersEntity, (order) => order.user)
   orders!: OrdersEntity[]

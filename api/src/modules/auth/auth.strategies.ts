@@ -42,7 +42,6 @@ export class JwtStrategy extends AuthService {
     if (!jwtSecret) {
       throw new Error('JWT_SECRET not found')
     }
-    // return passport.use('jwt', new PassportJWTStrategy(params, callback))
     return PassportUse<
       PassportJWTStrategy,
       StrategyOptionsWithSecret,
